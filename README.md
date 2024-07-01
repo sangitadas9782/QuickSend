@@ -1,7 +1,7 @@
 # QuickSend
 
 
-## QuickSend is a realtime collaborative code editor/compiler which helps users to connect, share, code & debug together in a seamless and engaging way.
+## QuickSend is an Easy, Fast, Reliable, and Secure money transfer Web application which makes sending money to friends and family with just a few clicks.
 
 
 ## Table of Contents
