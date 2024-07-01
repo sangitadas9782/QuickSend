@@ -1,9 +1,5 @@
 # QuickSend
 
-![home-page](https://github.com/Ratangulati/QuickSend/assets/116749593/62907220-7bac-4c45-8ab7-3374ceef0b80)
-
-![dashboard](https://github.com/Ratangulati/QuickSend/assets/116749593/6ab3ab32-b55a-4cd2-b764-9bbe00f1e639)
-
 
 ## QuickSend is an Easy, Fast, Reliable, and Secure money transfer Web application which makes sending money to friends and family with just a few clicks.
 
