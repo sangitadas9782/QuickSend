@@ -7,19 +7,19 @@
 
 ### Setup guidelines 🪜
 
-Follow these steps to setup CompileX on your local machine
+Follow these steps to setup QuickSend on your local machine
 
-1. [Fork](https://github.com/Ratangulati/CompileX.git) the project
+1. [Fork](https://github.com/Ratangulati/QuickSend.git) the project
 2. Clone the project to run on your local machine using the following command:
 
    ```sh
-   git clone https://github.com/<your_github_username>/CompileX.git
+   git clone https://github.com/<your_github_username>/QuickSend.git
    ```
 
 3. Get into the root directory
 
    ```sh
-   cd CompileX
+   cd QuickSend
    ```
 
 4. Install all dependencies by running
@@ -45,7 +45,7 @@ Follow these steps to setup CompileX on your local machine
 > 1. After forking and cloning the repo(as mentioned above), get into the project directory:
 >
 > ```bash
-> cd CompileX/
+> cd QuickSend/
 > ```
 >
 > 2. Start the docker container with:
@@ -77,7 +77,7 @@ Follow these steps to setup CompileX on your local machine
     git push origin "<your_branch_name>"
     ```
 
-11. Create a [PULL REQUEST](https://github.com/Ratangulati/CompileX/compare) 💣
+11. Create a [PULL REQUEST](https://github.com/Ratangulati/QuickSend/compare) 💣
 
     > Click _compare across forks_ if you don't see your branch
 
@@ -89,8 +89,8 @@ Follow these steps to setup CompileX on your local machine
    Launch GitHub Desktop and log in to your GitHub account if you haven't already.
 
 2. **Clone the Repository:**
-   - If you haven't cloned the CompileX repository yet, you can do so by clicking on the "File" menu and selecting "Clone Repository."
-   - Choose the CompileX repository from the list of repositories on GitHub and clone it to your local machine.
+   - If you haven't cloned the QuickSend repository yet, you can do so by clicking on the "File" menu and selecting "Clone Repository."
+   - Choose the QuickSend repository from the list of repositories on GitHub and clone it to your local machine.
 
 3. **Switch to the Correct Branch:**
    - Ensure you are on the branch that you want to submit a pull request for.
@@ -107,7 +107,7 @@ Follow these steps to setup CompileX on your local machine
    After committing your changes, click the "Push origin" button in the top right corner of GitHub Desktop to push your changes to your forked repository on GitHub.
 
 7. **Create a Pull Request:**
-  - Go to the GitHub website and navigate to your fork of the CompileX repository.
+  - Go to the GitHub website and navigate to your fork of the QuickSend repository.
   - You should see a button to "Compare & pull request" between your fork and the original repository. Click on it.
 
 8. **Review and Submit:**
@@ -115,4 +115,4 @@ Follow these steps to setup CompileX on your local machine
    - Once you're satisfied, click the "Create pull request" button to submit your pull request.
 
 9. **Wait for Review:**
-    Your pull request will now be available for review by the project maintainers. They may provide feedback or ask for changes before merging your pull request into the main branch of the CompileX repository.
+    Your pull request will now be available for review by the project maintainers. They may provide feedback or ask for changes before merging your pull request into the main branch of the QuickSend repository.

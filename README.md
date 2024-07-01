@@ -156,13 +156,13 @@
     ```
     The app should now be running at [http://localhost:3000](http://localhost:3000).
 
-6. Example config.js You can use in your backend
-```
-module.exports = {
-	JWT_SECRET: "your-secret",
-	MONGO_URL: "your-mongo-url"
-}
-```
+5. Example config.js You can use in your backend
+    ```
+    module.exports = {
+      JWT_SECRET: "your-secret",
+      MONGO_URL: "your-mongo-url"
+    }
+    ```
 
 ## How to Contribute 
 
