@@ -1,6 +1,14 @@
 const mongoose = require('mongoose');
+const { MONGO_URL } = require("./config");
 
-mongoose.connect("mongodb+srv://ratan123:123ratan@cluster0.p9ip0t4.mongodb.net/paytm")
+
+mongoose.connect(MONGO_URL)
+.then(() => {
+  console.log('MongoDB connected')
+})
+.catch((err) => {
+  console.log("MongoDB connection error:", err)
+});
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -43,10 +51,35 @@ const accountSchema = new mongoose.Schema({
     }
 });
 
+const transactionSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  amount: {
+    type: Number,
+    required: true
+  },
+  type: {
+    type: String,
+    enum: ['credit', 'debit'],
+    required: true
+  },
+  description: String,
+  date: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+
+const Transaction = mongoose.model('Transaction', transactionSchema);
 const Account = mongoose.model('Account', accountSchema);
 const User = mongoose.model('User', userSchema);
 
 module.exports = {
 	User,
-    Account
+    Account,
+    Transaction
 };

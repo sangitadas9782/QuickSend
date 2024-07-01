@@ -1,6 +1,6 @@
 const express = require('express');
 const { authMiddleware } = require('../middleware');
-const { Account } = require('../db');
+const { Account, User, Transaction } = require('../db');
 const { default: mongoose } = require('mongoose');
 
 const router = express.Router();
@@ -18,34 +18,81 @@ router.get("/balance", authMiddleware, async (req, res) => {
 router.post("/transfer", authMiddleware, async (req, res) => {
     const session = await mongoose.startSession();
 
-    session.startTransaction();
-    const { amount, to } = req.body;
+    try {
+        session.startTransaction();
+        const { amount, to } = req.body;
 
-    const account = await Account.findOne({ userId: req.userId }).session(session);
+        const account = await Account.findOne({ userId: req.userId }).session(session);
+        if (!account || account.balance < amount) {
+            await session.abortTransaction();
+            return res.status(400).json({
+                message: "Insufficient balance"
+            });
+        }
 
-    if (!account || account.balance < amount) {
-        await session.abortTransaction();
-        return res.status(400).json({
-            message: "Insufficient balance"
+        const toAccount = await Account.findOne({ userId: to }).session(session);
+        if (!toAccount) {
+            await session.abortTransaction();
+            return res.status(400).json({
+                message: "Invalid account"
+            });
+        }
+
+        await Account.updateOne({ userId: req.userId }, { $inc: { balance: -amount } }).session(session);
+        await Account.updateOne({ userId: to }, { $inc: { balance: amount } }).session(session);
+
+        const newTransaction = new Transaction({
+            userId: req.userId,
+            amount: amount,
+            type: 'debit',
+            description: `Transfer to ${to}`
         });
-    }
+        await newTransaction.save({ session });
 
-    const toAccount = await Account.findOne({ userId: to }).session(session);
-
-    if (!toAccount) {
-        await session.abortTransaction();
-        return res.status(400).json({
-            message: "Invalid account"
+        const recipientTransaction = new Transaction({
+            userId: to,
+            amount: amount,
+            type: 'credit',
+            description: `Received from ${req.userId}`
         });
+        await recipientTransaction.save({ session });
+
+        await session.commitTransaction();
+        res.json({
+            message: "Transfer successful"
+        });
+    } catch (error) {
+        await session.abortTransaction();
+        console.error('Transfer error:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    } finally {
+        session.endSession();
     }
+});
 
-    await Account.updateOne({ userId: req.userId }, { $inc: { balance: -amount } }).session(session);
-    await Account.updateOne({ userId: to }, { $inc: { balance: amount } }).session(session);
 
-    await session.commitTransaction();
-    res.json({
-        message: "Transfer successful"
-    });
+router.get('/transactions', authMiddleware, async (req, res) => {
+  try {
+      const transactions = await Transaction.find({ userId: req.userId })
+          .sort({ date: -1 })
+          .limit(10)
+          .populate('userId', 'firstName lastName')
+          .lean();
+
+      const formattedTransactions = transactions.map(t => ({
+          id: t._id,
+          amount: t.amount,
+          type: t.type,
+          description: t.description,
+          date: t.date,
+          userName: `${t.userId.firstName} ${t.userId.lastName}`
+      }));
+
+      res.json({ transactions: formattedTransactions });
+  } catch (error) {
+      console.error('Error fetching transactions:', error);
+      res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 module.exports = router;

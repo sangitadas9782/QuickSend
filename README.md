@@ -1,1 +1,1 @@
-easemoney
+QuickSend
