@@ -13,7 +13,7 @@ export const Users = () => {
       const fetchUsers = async () => {
         try {
           const token = localStorage.getItem('token');
-          const response = await axios.get(`http://localhost:3000/api/v1/user/bulk?filter=${filter}`, {
+          const response = await axios.get(`https://quicksend-eight.vercel.app/api/v1/user/bulk?filter=${filter}`, {
             headers: {
               Authorization: `Bearer ${token}`
             }

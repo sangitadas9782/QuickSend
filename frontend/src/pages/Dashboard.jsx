@@ -20,10 +20,10 @@ export const Dashboard = () => {
             setIsLoading(true);
             try {
                 const [balanceResponse, transactionsResponse] = await Promise.all([
-                    axios.get('http://localhost:3000/api/v1/account/balance', {
+                    axios.get('https://quicksend-eight.vercel.app/api/v1/account/balance', {
                         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
                     }),
-                    axios.get('http://localhost:3000/api/v1/account/transactions', {
+                    axios.get('https://quicksend-eight.vercel.app/api/v1/account/transactions', {
                         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
                     })
                 ]);
