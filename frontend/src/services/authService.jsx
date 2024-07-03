@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000/api/v1";
+const API_URL = "https://quicksend-eight.vercel.app/api/v1";
 
 export const signup = async (firstName, lastName, email, password) => {
     try {
